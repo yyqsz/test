@@ -1,0 +1,16 @@
+{
+  "unpublishedCollection": {
+    "name": "JSObject1",
+    "pageId": "Submit new order",
+    "pluginId": "js-plugin",
+    "pluginType": "JS",
+    "actions": [],
+    "archivedActions": [],
+    "body": "export default {\n\trandomWorkID: () => {\n    return Math.ceil(Math.random() * (9999 -  + 1)) + 1;\n}\n\t}",
+    "variables": [],
+    "userPermissions": []
+  },
+  "id": "Submit new order_JSObject1",
+  "deleted": false,
+  "gitSyncId": "6502b15c6fbfd93d5cd5e8e5_6502b2146fbfd93d5cd5e922"
+}

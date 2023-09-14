@@ -1,0 +1,25 @@
+{
+  "unpublishedCollection": {
+    "name": "JSObject1",
+    "pageId": "Admin",
+    "pluginId": "js-plugin",
+    "pluginType": "JS",
+    "actions": [],
+    "archivedActions": [],
+    "body": "export default {\n\tmyVar1: [],\n\tmyVar2: {},\n\t\n\tclear: () => {\n\t\tstoreValue('hoursSum',null);\n\t\tstoreValue('completedCount',null);\n\t\tstoreValue('equipmentStats',null);\n\t},\n\t\n\tsearch: () => {\n\t\tif(selectAgent.selectedOptionValue.length==0){\n\t\t\treturn select_work_orders.data\n\t\t}\n\t\telse{\n\t\t\treturn(select_work_orders.data.filter(user => user.agent==(selectAgent.selectedOptionLabel)))\n\t\t}\n\t},\n\t\n\ttotalHoursCalc: async() => {\n\t\tlet sum = 0\n\t\tif(selectAgent.selectedOptionValue.length == 0)\n\t  sum = select_work_ordersPage.data.reduce((accumulator, object) => {\n    return accumulator + object.hours;\n}, 0);\n\t\telse \n\t\t\tsum = select_work_ordersAgentPage.data.reduce((accumulator, object) => {\n  return accumulator + object.hours;\n}, 0);\n\t\t\t storeValue('hoursSum',sum);\n\n\t},\n\n\tcompletedCalc: async() => {\t\n\t\tawait select_work_ordersPage.run()\n\t\tawait select_work_ordersAgentPage.run()\n\t\tlet count = 0\n\n\t\tif(selectAgent.selectedOptionValue.length == 0)\n\t  count = (select_work_ordersPage.data.filter((item) => item.completed == \"Yes\")).length;\n\t\telse \n\t\tcount = (select_work_ordersAgentPage.data.filter((item) => item.completed == \"Yes\")).length;\n\n storeValue('completedCount',count);\n\t},\n\t\n\tequipChart: async() => {\n\t\tawait agent_stats.run()\n\t\tawait agent_statsAgent.run()\n\t\tlet chartData\n\t\tif(selectAgent.selectedOptionValue.length == 0)\n\t  chartData = agent_stats.data.map((gen) => {return {x: gen.equipment, y: gen.count }})\n\n\t\telse \n\t\tchartData = agent_statsAgent.data.map((gen) => {return {x: gen.equipment, y: gen.count }})\n\n    storeValue('equipmentStats',chartData);\n\t\tconsole.log(appsmith.store.equipmentStats)\n\t}\n\t\n}",
+    "variables": [
+      {
+        "name": "myVar1",
+        "value": "[]"
+      },
+      {
+        "name": "myVar2",
+        "value": "{}"
+      }
+    ],
+    "userPermissions": []
+  },
+  "id": "Admin_JSObject1",
+  "deleted": false,
+  "gitSyncId": "6502b15c6fbfd93d5cd5e8e5_6502b2146fbfd93d5cd5e924"
+}
